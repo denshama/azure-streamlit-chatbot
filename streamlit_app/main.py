@@ -1,6 +1,6 @@
 import streamlit as st
 import yaml
-from llm_bot import dummy_bot, echo_bot #contains logic for bot's response
+from llm_bot import createmail
 
 # Read config yaml file
 with open('./streamlit_app/config.yml', 'r') as file:
@@ -19,11 +19,11 @@ st.set_page_config(
     )
 
 # Set sidebar
-st.sidebar.title("About")
-st.sidebar.info(config['streamlit']['about'])
+#st.sidebar.title("About")
+#st.sidebar.info(config['streamlit']['about'])
 
 # Set logo
-st.image(config['streamlit']['logo'], width=50)
+st.image(config['streamlit']['logo'], width=200)
 
 # Set page title
 st.title(title)
@@ -37,23 +37,25 @@ if "messages" not in st.session_state:
         })
 
 # Display chat messages from history on app rerun
-for message in st.session_state.messages:
-    with st.chat_message(message["role"], avatar=avatar[message["role"]]):
-        st.markdown(message["content"])
+#for message in st.session_state.messages:
+#    with st.chat_message(message["role"], avatar=avatar[message["role"]]):
+#        st.markdown(message["content"])
+col1, col2 = st.columns(2)
+with col1:
+    content = st.text_input("Content", "tell me about leica products")
+    product = st.text_input("Product", "Stellaris 8")
+    about = st.text_input("About","best solution for cancer research, rapid procedures, flexibility and manoeuvrability")
+    action = st.text_input("Call to Action","call your salerep now for enhanced discount")
+with col2:
+    role = st.text_input("Role", "Microsopy Expert")
+    persona = st.text_input("Persona", "Buying Manager")
+    painpoint = st.text_input("Painpoint", "maximize use of systems, simplify workflows, better medical outcomes")
+    length = st.text_input("Number of Words", "250")
+    language = st.text_input("language", "English")
 
-# React to user input
-if prompt := st.chat_input("Send a message"):
-    # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    # Display user message in chat message container
-    with st.chat_message("user"):
-        st.markdown(prompt)
-    # Get bot response    
-    response = echo_bot(prompt)
-    with st.chat_message("assistant", avatar=config['streamlit']['avatar']):
-        st.markdown(response)
-    # Add assistant response to chat history
-    st.session_state.messages.append({"role": "assistant", "content": response})
+if st.button("Create Email"):
+    with st.expander("Email Created"):
+        st.markdown(createmail(content, product, about, action, role, persona, painpoint, length, language))
 
 
-    
+
