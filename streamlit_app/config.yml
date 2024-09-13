@@ -1,11 +1,10 @@
----
 streamlit:
-  title: "Applied AI team's bot"
-  tab_title: "LLM bot"
-  logo: "./streamlit_app/images/Microsoft_logo.png"
+  title: "LMS Marketing Mail Generator"
+  tab_title: "LMS Marketing Bot"
+  logo: "./streamlit_app/images/Leica_Microsystems_logo.png"
   page_icon: "./streamlit_app/images/Microsoft_logo.png"
   avatar: "./streamlit_app/images/openai.png"
   assistant_intro_message: "Hi there :wave:, I'm an AI assistant powered by Large Language Models. How can I help?" 
-  about: "this is a demo bot, author: Applied AI team"
+  about: "This is a Pilot to create emails for marketing campaigns using GPT-4o.\n The model is trained on the existing Product marketing Material from ContentHub.\n\n Enter the details in the form and click the Create Email button" 
 azure:
   dummy: "test"
